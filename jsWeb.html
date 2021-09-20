@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JSWeb</title>
+	</head>
+	<body id="body">
+		<div>This is a thing</div>
+	</body>
+	
+	<script>
+		
+		//Text Element Maker Class
+		class elementMaker {
+			makeTextElement(elementType, content, id) {
+				var tag = document.createElement(elementType);
+				tag.id = id
+				var text = document.createTextNode(content);
+				tag.appendChild(text);
+				var body = document.getElementById("body");
+				body.appendChild(tag);
+			}
+			
+			makeImageElement(image, id) {
+				var img = document.createElement("img");
+				img.src = image;
+				img.id = id
+				document.getElementById("body").appendChild(img);
+			}
+
+			makeAudioElement(source, type, id) {
+				var audio = document.createElement("audio");
+				audio.src = source;
+				audio.type = type;
+				audio.id = id;
+				document.getElementById("body").appendChild(audio);
+            }
+		}
+		
+		//Image Element Maker Class
+		class styleSetter {
+			setElementStyle(elementId, elementStyle, value) {
+				document.getElementById(elementId).attributeStyleMap.set(elementStyle, value);
+			}
+		}
+		
+		var maker = new elementMaker();
+		var style = new styleSetter();
+		
+		async function mouseIn() {
+			document.getElementById("test").style.color = "red";
+		}
+
+		async function mouseOut() {
+			document.getElementById("test").style.color = "black";
+		}
+		
+		maker.makeTextElement("h1", "text", "test");
+		style.setElementStyle("test", "border", "1px solid black");
+		document.getElementById("test").addEventListener("mouseover", mouseIn);
+		document.getElementById("test").addEventListener("mouseout", mouseOut);
+		maker.makeAudioElement("sample4.mp3", "audio/mpeg", "audio");
+		document.getElementById("audio").addEventListener("manplaythrough", event => {
+			document.getElementById("audio").play()
+		})
+
+	</script>
+	
+</html>
